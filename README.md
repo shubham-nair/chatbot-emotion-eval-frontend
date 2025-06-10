@@ -1,19 +1,47 @@
 # Emotion Evaluation Frontend
 
-This project is the frontend interface for the Emotion Evaluation application. It allows users to interact with the backend services for analyzing chat logs and visualizing emotion and semantic evaluation results.
+# Model Judge: Emotion & Semantic Evaluation Frontend
 
-## Local Development
+This is the React-based frontend for the Model Judge application, a tool designed to evaluate chatbot conversations for emotional intelligence and semantic relevance.
+
+This interface allows users to upload chat logs in a specific JSON format and view a detailed, turn-by-turn analysis of the model's performance, including emotion recognition accuracy and semantic similarity scores.
+
+This repository is the active development home for the frontend. The backend service can be found at [shubham-nair/EmotionEval_Chat-model-evaluate](https://github.com/shubham-nair/EmotionEval_Chat-model-evaluate).
+
+## Features
+
+- **File Upload:** Simple drag-and-drop or click-to-upload interface for `chat_logs.json`.
+- **Detailed Analysis:** View a comprehensive breakdown of each conversation turn.
+- **Emotion Recognition Summary:** See a summary of how the model responded to user emotions.
+- **Semantic Similarity Scores:** Quantify how well the bot's replies match the user's input context.
+- **Data Visualization:** Utilizes Recharts for clear and insightful charts.
+- **Responsive Design:** Built with Ant Design for a clean, modern, and responsive UI.
+
+## Getting Started
 
 ### Prerequisites
 
-*   Node.js and npm (or Yarn) installed.
+- Node.js (v14 or later)
+- npm or yarn
 
 ### Setup and Running
 
 1.  **Clone the repository:**
+
+    Choose one of the following methods:
+
+    *   **HTTPS:**
+        ```bash
+        git clone https://github.com/shubham-nair/chatbot-emotion-eval-frontend.git
+        ```
+    *   **SSH:**
+        ```bash
+        git clone git@github.com:shubham-nair/chatbot-emotion-eval-frontend.git
+        ```
+
+    Then, navigate into the directory:
     ```bash
-    git clone git@github.com:shubham-nair/emotion-eval-frontend.git
-    cd emotion-eval-frontend
+    cd chatbot-emotion-eval-frontend
     ```
 
 2.  **Install dependencies:**

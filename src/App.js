@@ -1,11 +1,90 @@
 import React, { useState } from 'react';
-import { Upload, Button, Table, Typography, Alert, Space, message, Card, Divider } from 'antd';
+import { Upload, Button, Table, Typography, Alert, Space, message, Card, Divider, Collapse } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { uploadFile } from './services/api';
 // If not installed, you can comment out the next two lines and the <BarChart> section
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 
 const { Title } = Typography;
+const { Panel } = Collapse;
+
+const sampleInputJson = `[
+  {
+    "session_id": "session_001",
+    "model_version": "Serenity",
+    "dialogue": [
+      {
+        "user_input": "I’ve been feeling overwhelmed recently.",
+        "bot_reply": "I’m sorry to hear that. Taking a few deep breaths or a short break can help clear your mind."
+      },
+      {
+        "user_input": "I’ll try stepping away for a bit.",
+        "bot_reply": "That sounds like a great idea. Let me know how it goes, and I’m here if you want to talk more."
+      }
+    ]
+  },
+  {
+    "session_id": "session_002",
+    "model_version": "Harmony",
+    "dialogue": [
+      {
+        "user_input": "I have an important presentation tomorrow and I’m nervous.",
+        "bot_reply": "Preparation is key. Would it help to run through an outline or practice a few slides?"
+      },
+      {
+        "user_input": "Yes, practicing would help me feel more confident.",
+        "bot_reply": "Let’s start with the opening. How would you introduce your topic?"
+      }
+    ]
+  }
+]`;
+
+const sampleOutputJson = `{
+  "session_001": {
+    "model_version": "Serenity",
+    "evaluations": [
+      {
+        "turn": 1,
+        "user_input": "I’ve been feeling overwhelmed recently.",
+        "bot_reply": "I’m sorry to hear that. Taking a few deep breaths or a short break can help clear your mind.",
+        "emotion_recognition": "Acknowledged User's Emotion",
+        "semantic_similarity_score": 0.8215
+      },
+      {
+        "turn": 2,
+        "user_input": "I’ll try stepping away for a bit.",
+        "bot_reply": "That sounds like a great idea. Let me know how it goes, and I’m here if you want to talk more.",
+        "emotion_recognition": "Supportive and Encouraging",
+        "semantic_similarity_score": 0.9134
+      }
+    ],
+    "summary": {
+      "average_semantic_similarity": 0.8675,
+      "emotion_recognition_summary": {
+        "Acknowledged User's Emotion": 1,
+        "Supportive and Encouraging": 1
+      }
+    }
+  },
+  "session_002": {
+    "model_version": "Harmony",
+    "evaluations": [
+      {
+        "turn": 1,
+        "user_input": "I have an important presentation tomorrow and I’m nervous.",
+        "bot_reply": "Preparation is key. Would it help to run through an outline or practice a few slides?",
+        "emotion_recognition": "Proactive and Solution-Oriented",
+        "semantic_similarity_score": 0.7588
+      }
+    ],
+    "summary": {
+      "average_semantic_similarity": 0.7588,
+      "emotion_recognition_summary": {
+        "Proactive and Solution-Oriented": 1
+      }
+    }
+  }
+}`;
 
 const summaryColumns = [
   { title: 'Model', dataIndex: 'model_version', key: 'model_version', align: 'center' },
@@ -225,10 +304,29 @@ export default function App() {
           </Space>
         )}
       </Card>
+
+        <Collapse style={{ marginTop: 24 }}>
+          <Panel header="View Sample Data" key="1">
+            <Row gutter={16}>
+              <Col span={12}>
+                <Title level={5}>Sample Input (chat_logs.json)</Title>
+                <pre style={{ background: '#f0f2f5', padding: '12px', borderRadius: '4px', maxHeight: '300px', overflow: 'auto' }}>
+                  <code>{sampleInputJson}</code>
+                </pre>
+              </Col>
+              <Col span={12}>
+                <Title level={5}>Sample Output</Title>
+                <pre style={{ background: '#f0f2f5', padding: '12px', borderRadius: '4px', maxHeight: '300px', overflow: 'auto' }}>
+                  <code>{sampleOutputJson}</code>
+                </pre>
+              </Col>
+            </Row>
+          </Panel>
+        </Collapse>
       <div style={{ textAlign: 'center', marginTop: 34, color: '#adb2be', fontSize: 15 }}>
         &copy; {new Date().getFullYear()} Model Judge | Powered by Ant Design & Recharts
         <span style={{ marginLeft: 16 }}>
-          <a href="https://github.com/Islene888/EmotionEval_Chat-model-evaluate" target="_blank" rel="noopener noreferrer" style={{ color: '#5672e3' }}>
+          <a href="https://github.com/shubham-nair/chatbot-emotion-eval-frontend" target="_blank" rel="noopener noreferrer" style={{ color: '#5672e3' }}>
             GitHub
           </a>
         </span>
