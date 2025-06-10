@@ -340,14 +340,41 @@ const summaryColumns = [
   { title: 'Sessions', dataIndex: 'count', key: 'count', align: 'center' },
 ];
 
+const detailColumns = [
+  { title: 'Session ID', dataIndex: 'session_id', key: 'session_id', align: 'center' },
+  { title: 'Model', dataIndex: 'model_version', key: 'model_version', align: 'center' },
+  { title: 'F1', dataIndex: 'f1_avg', key: 'f1_avg', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Precision', dataIndex: 'precision_avg', key: 'precision_avg', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Recall', dataIndex: 'recall_avg', key: 'recall_avg', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Start Sentiment', dataIndex: 'start_sentiment_avg', key: 'start_sentiment_avg', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'End Sentiment', dataIndex: 'end_sentiment_avg', key: 'end_sentiment_avg', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Emotion Lift', dataIndex: 'emotion_slope', key: 'emotion_slope', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Cumulative Gain', dataIndex: 'cumulative_gain', key: 'cumulative_gain', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Avg Bot Sentiment', dataIndex: 'avg_bot_sentiment', key: 'avg_bot_sentiment', align: 'center', render: val => val?.toFixed(4) },
+  { title: 'Turns', dataIndex: 'turns', key: 'turns', align: 'center' },
+];
+
+const chartMetrics = [
+  { key: 'f1_avg', name: 'Avg F1', color: '#4a90e2' },
+  { key: 'precision_avg', name: 'Precision', color: '#8bc34a' },
+  { key: 'recall_avg', name: 'Recall', color: '#ffc107' },
+  { key: 'emotion_slope', name: 'Emotion Lift', color: '#ff6f91' },
+];
+
+export default function App() {
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+  const [showAll, setShowAll] = useState(false);
+
   const handleDownload = () => {
-    if (!results) {
+    if (!result) {
       message.error('No results to download.');
       return;
     }
 
-    // Create a JSON string from the results state
-    const jsonString = JSON.stringify(results, null, 2);
+    // Create a JSON string from the result state
+    const jsonString = JSON.stringify(result, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
@@ -362,34 +389,6 @@ const summaryColumns = [
     // Clean up the object URL
     URL.revokeObjectURL(url);
   };
-
-  const detailColumns = [
-  { title: 'Session ID', dataIndex: 'session_id', key: 'session_id', align: 'center' },
-  { title: 'Model', dataIndex: 'model_version', key: 'model_version', align: 'center' },
-  { title: 'F1', dataIndex: 'f1_avg', key: 'f1_avg', align: 'center', render: val => val?.toFixed(4) },
-  { title: 'Precision', dataIndex: 'precision_avg', key: 'precision_avg', align: 'center', render: val => val?.toFixed(4) },
-  { title: 'Recall', dataIndex: 'recall_avg', key: 'recall_avg', align: 'center', render: val => val?.toFixed(4) },
-  { title: 'Start Sentiment', dataIndex: 'start_sentiment', key: 'start_sentiment', align: 'center', render: val => val?.toFixed(3) },
-  { title: 'End Sentiment', dataIndex: 'end_sentiment', key: 'end_sentiment', align: 'center', render: val => val?.toFixed(3) },
-  { title: 'Emotion Lift', dataIndex: 'emotion_slope', key: 'emotion_slope', align: 'center', render: val => val?.toFixed(3) },
-  { title: 'Cumulative Gain', dataIndex: 'cumulative_gain', key: 'cumulative_gain', align: 'center', render: val => val?.toFixed(3) },
-  { title: 'Avg Bot Sentiment', dataIndex: 'avg_bot_sentiment', key: 'avg_bot_sentiment', align: 'center', render: val => val?.toFixed(3) },
-  { title: 'Turns', dataIndex: 'turns', key: 'turns', align: 'center' },
-];
-
-// Chart metrics
-const chartMetrics = [
-  { key: 'f1_avg', name: 'Avg F1', color: '#4a90e2' },
-  { key: 'precision_avg', name: 'Precision', color: '#8bc34a' },
-  { key: 'recall_avg', name: 'Recall', color: '#ffc107' },
-  { key: 'emotion_slope', name: 'Emotion Lift', color: '#ff6f91' },
-];
-
-export default function App() {
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState('');
-  const [showAll, setShowAll] = useState(false);
 
   const handleUpload = async ({ file, onSuccess, onError }) => {
     setLoading(true);
