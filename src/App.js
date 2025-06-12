@@ -74,9 +74,9 @@ const chartMetrics = [
 const AboutSection = ({ isInitialState }) => {
     if (!isInitialState) return null;
     return (
-        <Card title={<Title level={3}>About AI Buddy Evaluator</Title>} bordered={false} style={{ background: '#fff', borderRadius: '8px', marginBottom: 24 }}>
+        <Card title={<Title level={3}>About PeronaAI Evaluator</Title>} bordered={false} style={{ background: '#fff', borderRadius: '8px', marginBottom: 24 }}>
             <Typography.Paragraph>
-                Evaluating a chatbot's quality goes deeper than just checking for correct answers. It's about understanding its impact on the user's emotions. We built AI Buddy Evaluator because traditional tools don't measure this crucial human element.
+                Evaluating a chatbot's quality goes deeper than just checking for correct answers. It's about understanding its impact on the user's emotions. We built PeronaAI Evaluator because traditional tools don't measure this crucial human element.
             </Typography.Paragraph>
         </Card>
     );
@@ -170,7 +170,7 @@ const App = () => {
         <Layout style={{ minHeight: '100vh', padding: '24px', background: '#f0f2f5' }}>
             <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                 <Title level={1} style={{ textAlign: 'center', marginBottom: '24px', color: '#1890ff' }}>
-                    AI Buddy Evaluator
+                    PeronaAI Evaluator
                 </Title>
 
                 <AboutSection isInitialState={isInitialState} />
@@ -291,7 +291,7 @@ const App = () => {
                     <a href="https://github.com/shubham-nair/chatbot-emotion-eval-frontend" target="_blank" rel="noopener noreferrer">Frontend Repo</a> and{' '}
                     <a href="https://github.com/shubham-nair/EmotionEval_Chat-model-evaluate" target="_blank" rel="noopener noreferrer">Backend Repo</a>.
                     <br />
-                    &copy; {new Date().getFullYear()} AI Buddy Evaluator. All rights reserved.
+                    &copy; {new Date().getFullYear()} PeronaAI Evaluator. All rights reserved.
                 </div>
             </Space>
         </Layout>

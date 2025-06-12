@@ -1,6 +1,6 @@
-# Model Judge: Emotion & Semantic Evaluation Frontend
+# PeronaAI: Emotion & Semantic Evaluation Frontend
 
-This is the React-based frontend for the **Model Judge** application, a tool designed to evaluate and visualize a chatbot's performance based on its emotional intelligence and semantic relevance.
+This is the React-based frontend for the **PeronaAI** application, a tool designed to evaluate and visualize a chatbot's performance based on its emotional intelligence and semantic relevance.
 
 This interface allows users to upload chat logs in a specified JSON format and receive a detailed, data-driven analysis. It provides insights into a model's emotional awareness and conversational coherence through clear metrics and visualizations.
 
